@@ -2,7 +2,7 @@
         .model flat,stdcall
         option casemap:none
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-;includeÎÄ¼ş¶¨Òå
+;includeæ–‡ä»¶å®šä¹‰
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 include       windows.inc
 
@@ -24,7 +24,7 @@ BACK_WIDTH EQU 1280
 IDB_BITMAP1 equ 104
 
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-;Êı¾İ¶Î
+;æ•°æ®æ®µ
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 .data
 GpInput       GdiplusStartupInput<1,0,0,0>
@@ -41,9 +41,9 @@ hbmp      DD       ?
 hdcc          dd        ?
                 .const
 szClassName   db       'MyClass',0
-szCaptionMain db       'ÌôÊ³Éß',0      ;±êÌâÃû³Æ
+szCaptionMain db       'æŒ‘é£Ÿè›‡',0      ;æ ‡é¢˜åç§°
 hBitmap HBITMAP ?
-OutMessage db "°´¼ü%c",0ah,0
+OutMessage db "æŒ‰é”®%c",0ah,0
 msg db "repaint!",10,0
 cnt db 0
 pimg dd ?
@@ -51,36 +51,36 @@ bckpath db "C:\Users\zjx\Desktop\mybck.bmp",0
 hInst dd ?
 
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-;´úÂë¶Î
+;ä»£ç æ®µ
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 .code
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-;»æÖÆ½çÃæ
+;ç»˜åˆ¶ç•Œé¢
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 draw proc 
     local hdcMem:HDC
     local rect:RECT
-    ;¼ÓÔØÍ¼Æ¬
+    ;åŠ è½½å›¾ç‰‡
     invoke LoadImage,NULL,addr bckpath,IMAGE_BITMAP,0,0,LR_LOADFROMFILE OR LR_CREATEDIBSECTION or LR_DEFAULTSIZE 
-    mov hbmp,eax                        ;±£´æÎ»Í¼¾ä±ú
-    invoke CreateCompatibleDC,hdcc      ;´´½¨Ò»¸öÓëÖ¸¶¨Éè±¸¼æÈİµÄÄÚ´æÉè±¸ÉÏÏÂÎÄ»·¾³
-    mov hdcMem,eax                      ;·µ»ØÄÚ´æÉè±¸ÉÏÏÂÎÄ»·¾³µÄ¾ä±ú
-    invoke SelectObject,hdcMem,hbmp     ;°ÑÒ»¸ö¶ÔÏó(Î»Í¼¡¢»­±Ê¡¢»­Ë¢µÈ)Ñ¡ÈëÖ¸¶¨µÄÉè±¸ÃèÊö±í¡£ĞÂµÄ¶ÔÏó´úÌæÍ¬Ò»ÀàĞÍµÄÀÏ¶ÔÏó¡£
-    invoke GetClientRect,ebx,addr rect  ;»ñÈ¡¿Í»§¶ËµÄ¾ØĞÎ¶ÔÏó£¬±£´æÔÚrectÀï
-    invoke BitBlt,hdcc,x,y,rect.right,rect.bottom,hdcMem,0,0,SRCCOPY    ;ÔÚÄÚ´æÖĞ½«Ä³Ò³ÃæÉÏµÄÒ»·ùÎ»Í¼¾­¹ıÒ»¶¨µÄ±ä»»×ªÒÆµ½ÁíÒ»¸öÒ³ÃæÉÏ
-    ;Ã¿»­Ò»´ÎÍ¼ÈÃËüÆ«ÒÆ10¸öÏñËØµ¥Î»£¬Ö®ºóÓÃÀ´Ä£ÄâÉßµÄÒÆ¶¯
-    mov eax,x       
-    add eax,10
-    mov x,eax
-    mov eax,y
-    add eax,10
-    mov y,eax
-    invoke DeleteDC,hdcMem              ;É¾³ıÉè±¸ÃèÊö±í
-    invoke DeleteObject,hbmp            ;É¾³ıÎ»Í¼¶ÔÏó
+    mov hbmp,eax                        ;ä¿å­˜ä½å›¾å¥æŸ„
+    invoke CreateCompatibleDC,hdcc      ;åˆ›å»ºä¸€ä¸ªä¸æŒ‡å®šè®¾å¤‡å…¼å®¹çš„å†…å­˜è®¾å¤‡ä¸Šä¸‹æ–‡ç¯å¢ƒ
+    mov hdcMem,eax                      ;è¿”å›å†…å­˜è®¾å¤‡ä¸Šä¸‹æ–‡ç¯å¢ƒçš„å¥æŸ„
+    invoke SelectObject,hdcMem,hbmp     ;æŠŠä¸€ä¸ªå¯¹è±¡(ä½å›¾ã€ç”»ç¬”ã€ç”»åˆ·ç­‰)é€‰å…¥æŒ‡å®šçš„è®¾å¤‡æè¿°è¡¨ã€‚æ–°çš„å¯¹è±¡ä»£æ›¿åŒä¸€ç±»å‹çš„è€å¯¹è±¡ã€‚
+    invoke GetClientRect,ebx,addr rect  ;è·å–å®¢æˆ·ç«¯çš„çŸ©å½¢å¯¹è±¡ï¼Œä¿å­˜åœ¨recté‡Œ
+    invoke BitBlt,hdcc,x,y,rect.right,rect.bottom,hdcMem,0,0,SRCCOPY    ;åœ¨å†…å­˜ä¸­å°†æŸé¡µé¢ä¸Šçš„ä¸€å¹…ä½å›¾ç»è¿‡ä¸€å®šçš„å˜æ¢è½¬ç§»åˆ°å¦ä¸€ä¸ªé¡µé¢ä¸Š
+    ;æ¯ç”»ä¸€æ¬¡å›¾è®©å®ƒåç§»10ä¸ªåƒç´ å•ä½ï¼Œä¹‹åç”¨æ¥æ¨¡æ‹Ÿè›‡çš„ç§»åŠ¨
+    ;mov eax,x       
+    ;add eax,10
+    ;mov x,eax
+    ;mov eax,y
+    ;add eax,10
+    ;mov y,eax
+    invoke DeleteDC,hdcMem              ;åˆ é™¤è®¾å¤‡æè¿°è¡¨
+    invoke DeleteObject,hbmp            ;åˆ é™¤ä½å›¾å¯¹è±¡
     ret
 draw endp
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-;´°¿Ú¹ı³Ì
+;çª—å£è¿‡ç¨‹
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 _ProcWinMain  proc     uses ebx edi esi,hWnd,uMsg,wParam,lParam
         local    @gdip
@@ -106,9 +106,9 @@ _ProcWinMain  proc     uses ebx edi esi,hWnd,uMsg,wParam,lParam
                    mov     ebx,hWnd
                    invoke BeginPaint,ebx,addr ps
                   .if  ebx == hWinMain
-                       mov hdcc,eax  ;hdccÓÃÀ´±£´æBeginPaint·µ»ØµÄhdc
+                       mov hdcc,eax  ;hdccç”¨æ¥ä¿å­˜BeginPaintè¿”å›çš„hdc
                        call draw
-                       invoke printf,addr msg   ;´òÓ¡repaint
+                       invoke printf,addr msg   ;æ‰“å°repaint
                    .endif
                    invoke EndPaint,ebx,addr ps
 ;********************************************************************************************
@@ -128,44 +128,44 @@ _ProcWinMain  proc     uses ebx edi esi,hWnd,uMsg,wParam,lParam
 _ProcWinMain  endp
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 _WinMain      proc
-              local    @stWndClass:WNDCLASSEX                           ;¶¨Òå¾Ö²¿±äÁ¿´°¿ÚÀà
-              local    @stMsg:MSG                                       ;¶¨Òå¾Ö²¿±äÁ¿ÏûÏ¢
+              local    @stWndClass:WNDCLASSEX                           ;å®šä¹‰å±€éƒ¨å˜é‡çª—å£ç±»
+              local    @stMsg:MSG                                       ;å®šä¹‰å±€éƒ¨å˜é‡æ¶ˆæ¯
 
-              invoke   GetModuleHandle,NULL                             ;·µ»ØÖ÷µ÷½ø³Ì(´Ë½ø³Ì)µÄ¿ÉÖ´ĞĞÎÄ¼şµÄ»ùµØÖ·
-              mov      hInstance,eax                                    ;µÃµ½µÄ¾ä±ú´æÈëhInstance
-              invoke   RtlZeroMemory,addr @stWndClass,sizeof @stWndClass;ÓÃÁãÌî³ä´°¿ÚÀà
-              invoke   LoadIcon,hInstance,IDI_ICON1
-              mov      hIcon,eax
+              invoke   GetModuleHandle,NULL                             ;è¿”å›ä¸»è°ƒè¿›ç¨‹(æ­¤è¿›ç¨‹)çš„å¯æ‰§è¡Œæ–‡ä»¶çš„åŸºåœ°å€
+              mov      hInstance,eax                                    ;å¾—åˆ°çš„å¥æŸ„å­˜å…¥hInstance
+              invoke   RtlZeroMemory,addr @stWndClass,sizeof @stWndClass;ç”¨é›¶å¡«å……çª—å£ç±»
+              ;invoke   LoadIcon,hInstance,IDI_ICON1
+              ;mov      hIcon,eax
               
 ;*******************************************************************************************
-;×¢²á´°¿ÚÀà
+;æ³¨å†Œçª—å£ç±»
 ;*******************************************************************************************
-              invoke   LoadCursor,0,IDC_ARROW                           ;ÔØÈëÏµÍ³×Ô´øµÄ¹â±ê 
-              mov      @stWndClass.hCursor,eax                          ;¹â±ê¾ä±úËÍÈë´°¿Ú¶ÔÓ¦¹â±ê×Ö¶Î
-              push     hIcon                                            
-              pop      @stWndClass.hIconSm                              ;Í¼±ê¾ä±úËÍÈëÏàÓ¦×Ö¶Î
+              invoke   LoadCursor,0,IDC_ARROW                           ;è½½å…¥ç³»ç»Ÿè‡ªå¸¦çš„å…‰æ ‡ 
+              mov      @stWndClass.hCursor,eax                          ;å…‰æ ‡å¥æŸ„é€å…¥çª—å£å¯¹åº”å…‰æ ‡å­—æ®µ
+              ;push     hIcon                                            
+              ;pop      @stWndClass.hIconSm                              ;å›¾æ ‡å¥æŸ„é€å…¥ç›¸åº”å­—æ®µ
               push     hInstance                
-              pop      @stWndClass.hInstance                            ;ÊµÀıµÄ¾ä±úËÍÈëÏàÓ¦×Ö¶Î
-              mov      @stWndClass.cbSize,sizeof WNDCLASSEX             ;ÉèÖÃ´°¿ÚÀàµÄ´óĞ¡
-              mov      @stWndClass.style,CS_HREDRAW or CS_VREDRAW       ;ÉèÖÃ´°¿ÚÑùÊ½
-              mov      @stWndClass.lpfnWndProc,offset _ProcWinMain      ;Ö¸¶¨»Øµ÷º¯Êı
-              mov      @stWndClass.hbrBackground,COLOR_WINDOW+1         ;±³¾°ÑÕÉ«
-              mov      @stWndClass.lpszClassName,offset szClassName     ;ÉèÖÃ´°¿ÚÀàÃû
+              pop      @stWndClass.hInstance                            ;å®ä¾‹çš„å¥æŸ„é€å…¥ç›¸åº”å­—æ®µ
+              mov      @stWndClass.cbSize,sizeof WNDCLASSEX             ;è®¾ç½®çª—å£ç±»çš„å¤§å°
+              mov      @stWndClass.style,CS_HREDRAW or CS_VREDRAW       ;è®¾ç½®çª—å£æ ·å¼
+              mov      @stWndClass.lpfnWndProc,offset _ProcWinMain      ;æŒ‡å®šå›è°ƒå‡½æ•°
+              mov      @stWndClass.hbrBackground,COLOR_WINDOW+1         ;èƒŒæ™¯é¢œè‰²
+              mov      @stWndClass.lpszClassName,offset szClassName     ;è®¾ç½®çª—å£ç±»å
               ;mov      @stWndClass.hIconSm,
-              invoke   RegisterClassEx,addr @stWndClass                 ;×¢²á´°¿ÚÀà
+              invoke   RegisterClassEx,addr @stWndClass                 ;æ³¨å†Œçª—å£ç±»
 ;*******************************************************************************************
-;½¨Á¢²¢ÏÔÊ¾´°¿Ú
+;å»ºç«‹å¹¶æ˜¾ç¤ºçª—å£
 ;*******************************************************************************************
               invoke   CreateWindowEx,WS_EX_CLIENTEDGE,offset szClassName,\ 
                        offset szCaptionMain,WS_OVERLAPPEDWINDOW,CW_USEDEFAULT,CW_USEDEFAULT\
-                       ,BACK_WIDTH+100,BACK_HEIGHT+100,NULL,NULL,hInstance,NULL    ;´´½¨window                         ;
-              mov      hWinMain,eax                                      ;±£´æ´°¿ÚµÄ¾ä±ú
-              invoke GetDC,eax                                           ;»ñÈ¡Éè±¸ÉÏÏÂÎÄ
-              mov  hWindowHdc,eax                                        ;±£´æÉè±¸ÉÏÏÂÎÄ
-              invoke   ShowWindow,hWinMain,SW_SHOWNORMAL                 ;ÏÔÊ¾´°¿Ú
-              invoke   UpdateWindow,hWinMain                             ;¸üĞÂ´°¿Ú
+                       ,BACK_WIDTH+100,BACK_HEIGHT+100,NULL,NULL,hInstance,NULL    ;åˆ›å»ºwindow                         ;
+              mov      hWinMain,eax                                      ;ä¿å­˜çª—å£çš„å¥æŸ„
+              invoke GetDC,eax                                           ;è·å–è®¾å¤‡ä¸Šä¸‹æ–‡
+              mov  hWindowHdc,eax                                        ;ä¿å­˜è®¾å¤‡ä¸Šä¸‹æ–‡
+              invoke   ShowWindow,hWinMain,SW_SHOWNORMAL                 ;æ˜¾ç¤ºçª—å£
+              invoke   UpdateWindow,hWinMain                             ;æ›´æ–°çª—å£
 ;*******************************************************************************************
-;ÏûÏ¢Ñ­»·
+;æ¶ˆæ¯å¾ªç¯
 ;*******************************************************************************************
               .while      TRUE
               invoke     PeekMessage, addr @stMsg, NULL, 0, 0, PM_REMOVE
@@ -173,9 +173,9 @@ _WinMain      proc
                 .break     .if @stMsg.message == WM_QUIT
                 invoke     TranslateMessage, addr @stMsg
                 invoke     DispatchMessage, addr @stMsg
-              .else                                                         ;<×öÆäËû¹¤×÷>
-                invoke Sleep,500                                            ;ĞİÃß0.5Ãë
-                invoke InvalidateRect,hWinMain,NULL,TRUE                    ;²Á³ıÔ­Í¼Ê¹Ö®Ê§Ğ§£¬²¢ÖØ·¢WM_PAINT
+              .else                                                         ;<åšå…¶ä»–å·¥ä½œ>
+                invoke Sleep,500                                            ;ä¼‘çœ 0.5ç§’
+                invoke InvalidateRect,hWinMain,NULL,FALSE                    ;æ“¦é™¤åŸå›¾ä½¿ä¹‹å¤±æ•ˆï¼Œå¹¶é‡å‘WM_PAINT
                 ;invoke UpdateWindow,hWinMain
                 ;invoke PostMessage,hWinMain,WM_PAINT,0,0
               .endif
